@@ -8,7 +8,7 @@ import type { Option } from '../types';
 
 export function Admin() {
   const navigate = useNavigate();
-  const { exams, updateQuestion, updateExamTitle, toggleShuffleExam, addExam, deleteExam } = useDataStore();
+  const { exams, updateQuestion, updateExamTitle, toggleShuffleExam, addExam, deleteExam, addQuestion, deleteQuestion } = useDataStore();
   const { sessions, clearHistory } = useActivityStore();
   
   const [activeTab, setActiveTab] = useState<'exams' | 'activity'>('exams');
@@ -249,7 +249,7 @@ export function Admin() {
                          ) : (
                            <button onClick={() => handleEditQuestionClick(q)} className="p-1.5 text-slate-400 hover:text-primary-600 rounded bg-white border border-slate-200 shadow-sm"><Edit className="w-4 h-4" /></button>
                          )}
-                         <button className="p-1.5 text-slate-400 hover:text-rose-600 rounded bg-white border border-slate-200 shadow-sm"><Trash2 className="w-4 h-4" /></button>
+                         <button onClick={() => { if(window.confirm('Xóa câu hỏi này?')) deleteQuestion(selectedExam.id, q.id) }} className="p-1.5 text-slate-400 hover:text-rose-600 rounded bg-white border border-slate-200 shadow-sm"><Trash2 className="w-4 h-4" /></button>
                       </div>
                     </div>
                     
@@ -294,6 +294,14 @@ export function Admin() {
                     </div>
                   </div>
                 ))}
+                
+                <button
+                  onClick={() => addQuestion(selectedExam.id)}
+                  className="w-full flex items-center justify-center gap-2 py-4 rounded-xl font-semibold text-primary-600 bg-primary-50 hover:bg-primary-100 transition-colors border-2 border-primary-200 border-dashed"
+                >
+                  <Plus className="w-5 h-5" />
+                  Thêm câu hỏi mới
+                </button>
               </div>
             </div>
           ) : (

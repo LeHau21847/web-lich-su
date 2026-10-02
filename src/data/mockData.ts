@@ -109,18 +109,61 @@ export const realMockExams: Exam[] = [
         ],
         correctOptionId: 'B'
       },
-      ...Array.from({ length: 15 }, (_, i) => ({
-        id: `q-thcs-filler-${i + 6}`,
-        content: `Câu hỏi lịch sử THCS bổ sung số ${i + 6}: Sự kiện lịch sử nào đánh dấu...`,
+      {
+        id: 'q6',
+        content: 'Khởi nghĩa Lam Sơn do ai lãnh đạo?',
         options: [
-          { id: 'A', content: 'Nội dung lựa chọn A' },
-          { id: 'B', content: 'Nội dung lựa chọn B' },
-          { id: 'C', content: 'Nội dung lựa chọn C' },
-          { id: 'D', content: 'Nội dung lựa chọn D' },
-          { id: 'E', content: 'Nội dung lựa chọn E' }
+          { id: 'A', content: 'Lê Lợi' },
+          { id: 'B', content: 'Nguyễn Trãi' },
+          { id: 'C', content: 'Quang Trung' },
+          { id: 'D', content: 'Trần Quốc Toản' }
         ],
-        correctOptionId: ['A', 'B', 'C', 'D', 'E'][i % 5]
-      }))
+        correctOptionId: 'A'
+      },
+      {
+        id: 'q7',
+        content: 'Bình Ngô Đại Cáo được viết bởi ai?',
+        options: [
+          { id: 'A', content: 'Lê Thánh Tông' },
+          { id: 'B', content: 'Nguyễn Trãi' },
+          { id: 'C', content: 'Nguyễn Bỉnh Khiêm' },
+          { id: 'D', content: 'Ngô Quyền' }
+        ],
+        correctOptionId: 'B'
+      },
+      {
+        id: 'q8',
+        content: 'Chiến thắng Ngọc Hồi - Đống Đa năm 1789 đánh bại quân xâm lược nào?',
+        options: [
+          { id: 'A', content: 'Quân Minh' },
+          { id: 'B', content: 'Quân Mông - Nguyên' },
+          { id: 'C', content: 'Quân Thanh' },
+          { id: 'D', content: 'Quân Tống' }
+        ],
+        correctOptionId: 'C'
+      },
+      {
+        id: 'q9',
+        content: 'Triều đại phong kiến cuối cùng của Việt Nam là?',
+        options: [
+          { id: 'A', content: 'Nhà Hậu Lê' },
+          { id: 'B', content: 'Nhà Tây Sơn' },
+          { id: 'C', content: 'Nhà Nguyễn' },
+          { id: 'D', content: 'Nhà Lý' }
+        ],
+        correctOptionId: 'C'
+      },
+      {
+        id: 'q10',
+        content: 'Thực dân Pháp bắt đầu nổ súng xâm lược Việt Nam vào năm nào?',
+        options: [
+          { id: 'A', content: '1858' },
+          { id: 'B', content: '1884' },
+          { id: 'C', content: '1945' },
+          { id: 'D', content: '1954' }
+        ],
+        correctOptionId: 'A'
+      }
     ]
   },
   {
@@ -189,18 +232,61 @@ export const realMockExams: Exam[] = [
         ],
         correctOptionId: 'C'
       },
-      ...Array.from({ length: 15 }, (_, i) => ({
-        id: `q-thpt-filler-${i + 6}`,
-        content: `Câu hỏi lịch sử THPT bổ sung số ${i + 6}: Trong giai đoạn kháng chiến chống Mỹ...`,
+      {
+        id: 'q-thpt-6',
+        content: 'Hội nghị thành lập Đảng Cộng sản Việt Nam (1930) diễn ra tại đâu?',
         options: [
-          { id: 'A', content: 'Phương án A' },
-          { id: 'B', content: 'Phương án B' },
-          { id: 'C', content: 'Phương án C' },
-          { id: 'D', content: 'Phương án D' },
-          { id: 'E', content: 'Phương án E' }
+          { id: 'A', content: 'Ma Cao (Trung Quốc)' },
+          { id: 'B', content: 'Hương Cảng (Trung Quốc)' },
+          { id: 'C', content: 'Quảng Châu (Trung Quốc)' },
+          { id: 'D', content: 'Cao Bằng (Việt Nam)' }
         ],
-        correctOptionId: ['A', 'B', 'C', 'D', 'E'][i % 5]
-      }))
+        correctOptionId: 'B'
+      },
+      {
+        id: 'q-thpt-7',
+        content: 'Phong trào Đồng Khởi (1959-1960) nổ ra mạnh mẽ nhất ở tỉnh nào?',
+        options: [
+          { id: 'A', content: 'Trà Vinh' },
+          { id: 'B', content: 'Bến Tre' },
+          { id: 'C', content: 'Mỹ Tho' },
+          { id: 'D', content: 'Tây Ninh' }
+        ],
+        correctOptionId: 'B'
+      },
+      {
+        id: 'q-thpt-8',
+        content: 'Ai là người cắm lá cờ chiến thắng lên nóc hầm tướng De Castries?',
+        options: [
+          { id: 'A', content: 'Phan Đình Giót' },
+          { id: 'B', content: 'Bế Văn Đàn' },
+          { id: 'C', content: 'Tạ Quốc Luật' },
+          { id: 'D', content: 'Tô Vĩnh Diện' }
+        ],
+        correctOptionId: 'C'
+      },
+      {
+        id: 'q-thpt-9',
+        content: 'Chiến dịch Hồ Chí Minh lịch sử bắt đầu từ ngày nào?',
+        options: [
+          { id: 'A', content: '26/4/1975' },
+          { id: 'B', content: '4/3/1975' },
+          { id: 'C', content: '9/4/1975' },
+          { id: 'D', content: '30/4/1975' }
+        ],
+        correctOptionId: 'A'
+      },
+      {
+        id: 'q-thpt-10',
+        content: 'Quốc gia nào thiết lập quan hệ ngoại giao với Việt Nam đầu tiên (1950)?',
+        options: [
+          { id: 'A', content: 'Liên Xô' },
+          { id: 'B', content: 'Trung Quốc' },
+          { id: 'C', content: 'Cuba' },
+          { id: 'D', content: 'Pháp' }
+        ],
+        correctOptionId: 'B'
+      }
     ]
   }
 ];

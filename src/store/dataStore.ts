@@ -10,6 +10,8 @@ interface DataState {
   toggleShuffleExam: (examId: string) => void;
   addExam: () => void;
   deleteExam: (examId: string) => void;
+  addQuestion: (examId: string) => void;
+  deleteQuestion: (examId: string, questionId: string) => void;
 }
 
 export const useDataStore = create<DataState>()(
@@ -46,24 +48,50 @@ export const useDataStore = create<DataState>()(
       level: 'THCS',
       title: 'Đề thi mới (Chưa đặt tên)',
       timeLimit: 15 * 60,
-      questions: Array.from({ length: 20 }, (_, i) => ({
-        id: `q-${newId}-${i}`,
-        content: `Câu hỏi số ${i + 1}`,
-        options: [
-          { id: 'A', content: 'Lựa chọn A' },
-          { id: 'B', content: 'Lựa chọn B' },
-          { id: 'C', content: 'Lựa chọn C' },
-          { id: 'D', content: 'Lựa chọn D' },
-          { id: 'E', content: 'Lựa chọn E' }
-        ],
-        correctOptionId: 'A'
-      }))
+      questions: [
+        {
+          id: `q-${newId}-${Date.now()}`,
+          content: `Nội dung câu hỏi mới`,
+          options: [
+            { id: 'A', content: 'Lựa chọn A' },
+            { id: 'B', content: 'Lựa chọn B' },
+            { id: 'C', content: 'Lựa chọn C' },
+            { id: 'D', content: 'Lựa chọn D' }
+          ],
+          correctOptionId: 'A'
+        }
+      ]
     };
     return { exams: [...state.exams, newExam] };
   }),
 
   deleteExam: (examId) => set((state) => ({
     exams: state.exams.filter(e => e.id !== examId)
+  })),
+
+  addQuestion: (examId) => set((state) => ({
+    exams: state.exams.map(exam => {
+      if (exam.id !== examId) return exam;
+      const newQ: Question = {
+        id: `q-custom-${Date.now()}`,
+        content: 'Câu hỏi mới',
+        options: [
+          { id: 'A', content: 'Đáp án A' },
+          { id: 'B', content: 'Đáp án B' },
+          { id: 'C', content: 'Đáp án C' },
+          { id: 'D', content: 'Đáp án D' }
+        ],
+        correctOptionId: 'A'
+      };
+      return { ...exam, questions: [...exam.questions, newQ] };
+    })
+  })),
+
+  deleteQuestion: (examId, questionId) => set((state) => ({
+    exams: state.exams.map(exam => {
+      if (exam.id !== examId) return exam;
+      return { ...exam, questions: exam.questions.filter(q => q.id !== questionId) };
+    })
   }))
     }),
     {

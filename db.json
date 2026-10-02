@@ -1,35 +1,547 @@
 {
   "exams": [
     {
-      "id": "exam-1",
+      "id": "exam-custom-1790938000302",
       "level": "THCS",
-      "title": "Đề thi thử Lịch sử THCS - Số 01",
+      "title": "Đề thi mới (Chưa đặt tên)",
       "timeLimit": 900,
-      "isShuffled": false,
       "questions": [
         {
-          "id": "q-1-1",
-          "content": "Nhà nước Văn Lang ra đời vào khoảng thời gian nào?",
+          "id": "q-exam-custom-1790938000302-0",
+          "content": "Câu hỏi số 1",
           "options": [
             {
               "id": "A",
-              "content": "Thế kỷ VII TCN"
+              "content": "Lựa chọn A"
             },
             {
               "id": "B",
-              "content": "Thế kỷ VIII TCN"
+              "content": "Lựa chọn B"
             },
             {
               "id": "C",
-              "content": "Thế kỷ IX TCN"
+              "content": "Lựa chọn C"
             },
             {
               "id": "D",
-              "content": "Thế kỷ X TCN"
+              "content": "Lựa chọn D"
             },
             {
               "id": "E",
-              "content": "Thế kỷ VI TCN"
+              "content": "Lựa chọn E"
+            }
+          ],
+          "correctOptionId": "A"
+        },
+        {
+          "id": "q-exam-custom-1790938000302-1",
+          "content": "Câu hỏi số 2",
+          "options": [
+            {
+              "id": "A",
+              "content": "Lựa chọn A"
+            },
+            {
+              "id": "B",
+              "content": "Lựa chọn B"
+            },
+            {
+              "id": "C",
+              "content": "Lựa chọn C"
+            },
+            {
+              "id": "D",
+              "content": "Lựa chọn D"
+            },
+            {
+              "id": "E",
+              "content": "Lựa chọn E"
+            }
+          ],
+          "correctOptionId": "A"
+        },
+        {
+          "id": "q-exam-custom-1790938000302-2",
+          "content": "Câu hỏi số 3",
+          "options": [
+            {
+              "id": "A",
+              "content": "Lựa chọn A"
+            },
+            {
+              "id": "B",
+              "content": "Lựa chọn B"
+            },
+            {
+              "id": "C",
+              "content": "Lựa chọn C"
+            },
+            {
+              "id": "D",
+              "content": "Lựa chọn D"
+            },
+            {
+              "id": "E",
+              "content": "Lựa chọn E"
+            }
+          ],
+          "correctOptionId": "A"
+        },
+        {
+          "id": "q-exam-custom-1790938000302-3",
+          "content": "Câu hỏi số 4",
+          "options": [
+            {
+              "id": "A",
+              "content": "Lựa chọn A"
+            },
+            {
+              "id": "B",
+              "content": "Lựa chọn B"
+            },
+            {
+              "id": "C",
+              "content": "Lựa chọn C"
+            },
+            {
+              "id": "D",
+              "content": "Lựa chọn D"
+            },
+            {
+              "id": "E",
+              "content": "Lựa chọn E"
+            }
+          ],
+          "correctOptionId": "A"
+        },
+        {
+          "id": "q-exam-custom-1790938000302-4",
+          "content": "Câu hỏi số 5",
+          "options": [
+            {
+              "id": "A",
+              "content": "Lựa chọn A"
+            },
+            {
+              "id": "B",
+              "content": "Lựa chọn B"
+            },
+            {
+              "id": "C",
+              "content": "Lựa chọn C"
+            },
+            {
+              "id": "D",
+              "content": "Lựa chọn D"
+            },
+            {
+              "id": "E",
+              "content": "Lựa chọn E"
+            }
+          ],
+          "correctOptionId": "A"
+        },
+        {
+          "id": "q-exam-custom-1790938000302-5",
+          "content": "Câu hỏi số 6",
+          "options": [
+            {
+              "id": "A",
+              "content": "Lựa chọn A"
+            },
+            {
+              "id": "B",
+              "content": "Lựa chọn B"
+            },
+            {
+              "id": "C",
+              "content": "Lựa chọn C"
+            },
+            {
+              "id": "D",
+              "content": "Lựa chọn D"
+            },
+            {
+              "id": "E",
+              "content": "Lựa chọn E"
+            }
+          ],
+          "correctOptionId": "A"
+        },
+        {
+          "id": "q-exam-custom-1790938000302-6",
+          "content": "Câu hỏi số 7",
+          "options": [
+            {
+              "id": "A",
+              "content": "Lựa chọn A"
+            },
+            {
+              "id": "B",
+              "content": "Lựa chọn B"
+            },
+            {
+              "id": "C",
+              "content": "Lựa chọn C"
+            },
+            {
+              "id": "D",
+              "content": "Lựa chọn D"
+            },
+            {
+              "id": "E",
+              "content": "Lựa chọn E"
+            }
+          ],
+          "correctOptionId": "A"
+        },
+        {
+          "id": "q-exam-custom-1790938000302-7",
+          "content": "Câu hỏi số 8",
+          "options": [
+            {
+              "id": "A",
+              "content": "Lựa chọn A"
+            },
+            {
+              "id": "B",
+              "content": "Lựa chọn B"
+            },
+            {
+              "id": "C",
+              "content": "Lựa chọn C"
+            },
+            {
+              "id": "D",
+              "content": "Lựa chọn D"
+            },
+            {
+              "id": "E",
+              "content": "Lựa chọn E"
+            }
+          ],
+          "correctOptionId": "A"
+        },
+        {
+          "id": "q-exam-custom-1790938000302-8",
+          "content": "Câu hỏi số 9",
+          "options": [
+            {
+              "id": "A",
+              "content": "Lựa chọn A"
+            },
+            {
+              "id": "B",
+              "content": "Lựa chọn B"
+            },
+            {
+              "id": "C",
+              "content": "Lựa chọn C"
+            },
+            {
+              "id": "D",
+              "content": "Lựa chọn D"
+            },
+            {
+              "id": "E",
+              "content": "Lựa chọn E"
+            }
+          ],
+          "correctOptionId": "A"
+        },
+        {
+          "id": "q-exam-custom-1790938000302-9",
+          "content": "Câu hỏi số 10",
+          "options": [
+            {
+              "id": "A",
+              "content": "Lựa chọn A"
+            },
+            {
+              "id": "B",
+              "content": "Lựa chọn B"
+            },
+            {
+              "id": "C",
+              "content": "Lựa chọn C"
+            },
+            {
+              "id": "D",
+              "content": "Lựa chọn D"
+            },
+            {
+              "id": "E",
+              "content": "Lựa chọn E"
+            }
+          ],
+          "correctOptionId": "A"
+        },
+        {
+          "id": "q-exam-custom-1790938000302-10",
+          "content": "Câu hỏi số 11",
+          "options": [
+            {
+              "id": "A",
+              "content": "Lựa chọn A"
+            },
+            {
+              "id": "B",
+              "content": "Lựa chọn B"
+            },
+            {
+              "id": "C",
+              "content": "Lựa chọn C"
+            },
+            {
+              "id": "D",
+              "content": "Lựa chọn D"
+            },
+            {
+              "id": "E",
+              "content": "Lựa chọn E"
+            }
+          ],
+          "correctOptionId": "A"
+        },
+        {
+          "id": "q-exam-custom-1790938000302-11",
+          "content": "Câu hỏi số 12",
+          "options": [
+            {
+              "id": "A",
+              "content": "Lựa chọn A"
+            },
+            {
+              "id": "B",
+              "content": "Lựa chọn B"
+            },
+            {
+              "id": "C",
+              "content": "Lựa chọn C"
+            },
+            {
+              "id": "D",
+              "content": "Lựa chọn D"
+            },
+            {
+              "id": "E",
+              "content": "Lựa chọn E"
+            }
+          ],
+          "correctOptionId": "A"
+        },
+        {
+          "id": "q-exam-custom-1790938000302-12",
+          "content": "Câu hỏi số 13",
+          "options": [
+            {
+              "id": "A",
+              "content": "Lựa chọn A"
+            },
+            {
+              "id": "B",
+              "content": "Lựa chọn B"
+            },
+            {
+              "id": "C",
+              "content": "Lựa chọn C"
+            },
+            {
+              "id": "D",
+              "content": "Lựa chọn D"
+            },
+            {
+              "id": "E",
+              "content": "Lựa chọn E"
+            }
+          ],
+          "correctOptionId": "A"
+        },
+        {
+          "id": "q-exam-custom-1790938000302-13",
+          "content": "Câu hỏi số 14",
+          "options": [
+            {
+              "id": "A",
+              "content": "Lựa chọn A"
+            },
+            {
+              "id": "B",
+              "content": "Lựa chọn B"
+            },
+            {
+              "id": "C",
+              "content": "Lựa chọn C"
+            },
+            {
+              "id": "D",
+              "content": "Lựa chọn D"
+            },
+            {
+              "id": "E",
+              "content": "Lựa chọn E"
+            }
+          ],
+          "correctOptionId": "A"
+        },
+        {
+          "id": "q-exam-custom-1790938000302-14",
+          "content": "Câu hỏi số 15",
+          "options": [
+            {
+              "id": "A",
+              "content": "Lựa chọn A"
+            },
+            {
+              "id": "B",
+              "content": "Lựa chọn B"
+            },
+            {
+              "id": "C",
+              "content": "Lựa chọn C"
+            },
+            {
+              "id": "D",
+              "content": "Lựa chọn D"
+            },
+            {
+              "id": "E",
+              "content": "Lựa chọn E"
+            }
+          ],
+          "correctOptionId": "A"
+        },
+        {
+          "id": "q-exam-custom-1790938000302-15",
+          "content": "Câu hỏi số 16",
+          "options": [
+            {
+              "id": "A",
+              "content": "Lựa chọn A"
+            },
+            {
+              "id": "B",
+              "content": "Lựa chọn B"
+            },
+            {
+              "id": "C",
+              "content": "Lựa chọn C"
+            },
+            {
+              "id": "D",
+              "content": "Lựa chọn D"
+            },
+            {
+              "id": "E",
+              "content": "Lựa chọn E"
+            }
+          ],
+          "correctOptionId": "A"
+        },
+        {
+          "id": "q-exam-custom-1790938000302-16",
+          "content": "Câu hỏi số 17",
+          "options": [
+            {
+              "id": "A",
+              "content": "Lựa chọn A"
+            },
+            {
+              "id": "B",
+              "content": "Lựa chọn B"
+            },
+            {
+              "id": "C",
+              "content": "Lựa chọn C"
+            },
+            {
+              "id": "D",
+              "content": "Lựa chọn D"
+            },
+            {
+              "id": "E",
+              "content": "Lựa chọn E"
+            }
+          ],
+          "correctOptionId": "A"
+        },
+        {
+          "id": "q-exam-custom-1790938000302-17",
+          "content": "Câu hỏi số 18",
+          "options": [
+            {
+              "id": "A",
+              "content": "Lựa chọn A"
+            },
+            {
+              "id": "B",
+              "content": "Lựa chọn B"
+            },
+            {
+              "id": "C",
+              "content": "Lựa chọn C"
+            },
+            {
+              "id": "D",
+              "content": "Lựa chọn D"
+            },
+            {
+              "id": "E",
+              "content": "Lựa chọn E"
+            }
+          ],
+          "correctOptionId": "A"
+        },
+        {
+          "id": "q-exam-custom-1790938000302-18",
+          "content": "Câu hỏi số 19",
+          "options": [
+            {
+              "id": "A",
+              "content": "Lựa chọn A"
+            },
+            {
+              "id": "B",
+              "content": "Lựa chọn B"
+            },
+            {
+              "id": "C",
+              "content": "Lựa chọn C"
+            },
+            {
+              "id": "D",
+              "content": "Lựa chọn D"
+            },
+            {
+              "id": "E",
+              "content": "Lựa chọn E"
+            }
+          ],
+          "correctOptionId": "A"
+        },
+        {
+          "id": "q-exam-custom-1790938000302-19",
+          "content": "Câu hỏi số 20",
+          "options": [
+            {
+              "id": "A",
+              "content": "Lựa chọn A"
+            },
+            {
+              "id": "B",
+              "content": "Lựa chọn B"
+            },
+            {
+              "id": "C",
+              "content": "Lựa chọn C"
+            },
+            {
+              "id": "D",
+              "content": "Lựa chọn D"
+            },
+            {
+              "id": "E",
+              "content": "Lựa chọn E"
             }
           ],
           "correctOptionId": "A"
@@ -38,6 +550,14 @@
     }
   ],
   "sessions": [
+    {
+      "id": "session-1790937978702",
+      "studentName": "nguyễn văn A",
+      "examId": "exam-1",
+      "examTitle": "Đề thi thử Lịch sử THCS - Số 01",
+      "status": "doing",
+      "startTime": 1790937978702
+    },
     {
       "id": "session-1790936428733",
       "studentName": "21",
