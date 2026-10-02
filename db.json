@@ -1,0 +1,41 @@
+{
+  "exams": [
+    {
+      "id": "exam-1",
+      "level": "THCS",
+      "title": "Đề thi thử Lịch sử THCS - Số 01",
+      "timeLimit": 900,
+      "isShuffled": false,
+      "questions": [
+        {
+          "id": "q-1-1",
+          "content": "Nhà nước Văn Lang ra đời vào khoảng thời gian nào?",
+          "options": [
+            {
+              "id": "A",
+              "content": "Thế kỷ VII TCN"
+            },
+            {
+              "id": "B",
+              "content": "Thế kỷ VIII TCN"
+            },
+            {
+              "id": "C",
+              "content": "Thế kỷ IX TCN"
+            },
+            {
+              "id": "D",
+              "content": "Thế kỷ X TCN"
+            },
+            {
+              "id": "E",
+              "content": "Thế kỷ VI TCN"
+            }
+          ],
+          "correctOptionId": "A"
+        }
+      ]
+    }
+  ],
+  "sessions": []
+}
