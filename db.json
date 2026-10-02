@@ -37,5 +37,14 @@
       ]
     }
   ],
-  "sessions": []
+  "sessions": [
+    {
+      "id": "session-1790936428733",
+      "studentName": "21",
+      "examId": "exam-1",
+      "examTitle": "Đề thi thử Lịch sử THCS - Số 01",
+      "status": "doing",
+      "startTime": 1790936428733
+    }
+  ]
 }

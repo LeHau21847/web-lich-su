@@ -22,7 +22,10 @@ export function Home() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center p-4 bg-[url('/bg-home.png')] bg-cover bg-center bg-fixed relative">
+    <div 
+      className="min-h-screen flex flex-col items-center justify-center p-4 bg-cover bg-center bg-fixed relative"
+      style={{ backgroundImage: `url('/bg-home.png')` }}
+    >
       {/* Overlay */}
       <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm"></div>
       
