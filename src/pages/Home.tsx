@@ -4,6 +4,7 @@ import { useExamStore } from '../store/examStore';
 import { useAuthStore } from '../store/authStore';
 import { useActivityStore } from '../store/activityStore';
 import { BookOpen, GraduationCap, ArrowRight, LogOut, User as UserIcon } from 'lucide-react';
+import bgHome from '../assets/bg-home.png';
 
 export function Home() {
   const navigate = useNavigate();
@@ -24,7 +25,7 @@ export function Home() {
   return (
     <div 
       className="min-h-screen flex flex-col items-center justify-center p-4 bg-cover bg-center bg-fixed relative"
-      style={{ backgroundImage: `url('/bg-home.png')` }}
+      style={{ backgroundImage: `url(${bgHome})` }}
     >
       {/* Overlay */}
       <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm"></div>

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../store/authStore';
 import { ShieldCheck, User } from 'lucide-react';
+import bgLogin from '../assets/bg-login.png';
 
 export function Login() {
   const navigate = useNavigate();
@@ -33,7 +34,7 @@ export function Login() {
   return (
     <div 
       className="min-h-screen flex items-center justify-center bg-cover bg-center p-4 relative"
-      style={{ backgroundImage: `url('/bg-login.png')` }}
+      style={{ backgroundImage: `url(${bgLogin})` }}
     >
       <div className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm"></div>
       <div className="w-full max-w-md bg-white/95 backdrop-blur-xl rounded-3xl shadow-xl overflow-hidden relative z-10 border border-white/20">
