@@ -16,7 +16,7 @@ export function Home() {
   const handleStartExam = (examId: string) => {
     const exam = exams.find(e => e.id === examId);
     if (exam) {
-      const sessionId = startSession(username, exam.id, exam.title);
+      const sessionId = startSession(username || 'Khách', exam.id, exam.title);
       setCurrentExam(exam, sessionId);
       navigate('/exam');
     }

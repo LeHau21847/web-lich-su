@@ -2,19 +2,17 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDataStore } from '../store/dataStore';
 import { useAuthStore } from '../store/authStore';
-import { useActivityStore } from '../store/activityStore';
-import { ChevronLeft, Edit, Save, Trash2, LogOut, X, Shuffle, CheckCircle2, Plus, ToggleLeft, ToggleRight, Activity, Users, Clock, Target, Eye } from 'lucide-react';
+import { Edit, Save, Trash2, LogOut, X, Plus, ToggleLeft, ToggleRight, CheckCircle2 } from 'lucide-react';
 import type { Option } from '../types';
 
 export function Admin() {
   const navigate = useNavigate();
   const { exams, updateQuestion, updateExamTitle, toggleShuffleExam, addExam, deleteExam, addQuestion, deleteQuestion } = useDataStore();
-  const { sessions, clearHistory } = useActivityStore();
-  
-  const [activeTab, setActiveTab] = useState<'exams' | 'activity'>('exams');
+
+
   const { logout, username } = useAuthStore();
   
-  const [selectedExamId, setSelectedExamId] = useState(exams[0]?.id);
+  const [selectedExamId, setSelectedExamId] = useState<string>(exams[0]?.id || '');
   const selectedExam = exams.find(e => e.id === selectedExamId);
 
   // Edit Exam State
@@ -72,12 +70,11 @@ export function Admin() {
     if (window.confirm('Bạn có chắc chắn muốn xóa vĩnh viễn đề thi này không?')) {
       deleteExam(examId);
       if (selectedExamId === examId) {
-        setSelectedExamId(exams.length > 1 ? exams.find(e => e.id !== examId)?.id : undefined);
+        setSelectedExamId(exams.length > 1 ? exams.find(e => e.id !== examId)?.id || '' : '');
       }
     }
   };
 
-  const [viewingSession, setViewingSession] = useState<any>(null);
 
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col">
@@ -99,7 +96,7 @@ export function Admin() {
         </div>
       </header>
 
-      {activeTab === 'exams' && (
+
       <div className="flex-1 max-w-7xl mx-auto w-full px-4 py-8 flex flex-col lg:flex-row gap-8">
         <div className="w-full lg:w-64 shrink-0">
           <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
@@ -311,161 +308,7 @@ export function Admin() {
           )}
         </div>
       </div>
-      )}
 
-      {activeTab === 'activity' && (
-        <div className="flex-1 max-w-7xl mx-auto w-full px-4 py-8">
-          <div className="flex justify-between items-center mb-6">
-            <div>
-              <h2 className="text-2xl font-bold text-slate-800">Hoạt động thi</h2>
-              <p className="text-slate-500 text-sm mt-1">Đang theo dõi trực tiếp {sessions.filter(s => s.status === 'doing').length} học sinh làm bài.</p>
-            </div>
-            <button onClick={clearHistory} className="px-4 py-2 text-sm text-rose-600 font-semibold bg-rose-50 hover:bg-rose-100 rounded-lg">
-              Xóa dữ liệu cũ
-            </button>
-          </div>
-
-          <div className="bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden">
-            <div className="overflow-x-auto">
-              <table className="w-full text-left border-collapse">
-                <thead>
-                  <tr className="bg-slate-50 border-b border-slate-200 text-sm text-slate-500 uppercase tracking-wider">
-                    <th className="px-6 py-4 font-semibold">Học sinh</th>
-                    <th className="px-6 py-4 font-semibold">Tên đề thi</th>
-                    <th className="px-6 py-4 font-semibold">Trạng thái</th>
-                    <th className="px-6 py-4 font-semibold">Điểm số</th>
-                    <th className="px-6 py-4 font-semibold text-right">Thao tác</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-slate-100">
-                  {sessions.map(s => (
-                    <tr key={s.id} className="hover:bg-slate-50 transition-colors">
-                      <td className="px-6 py-4 font-bold text-slate-800 flex items-center gap-2">
-                        <UserIcon className="w-4 h-4 text-slate-400" />
-                        {s.studentName}
-                      </td>
-                      <td className="px-6 py-4 text-slate-600 font-medium">
-                        {s.examTitle}
-                        <div className="text-xs text-slate-400 mt-1">
-                          Vào thi: {new Date(s.startTime).toLocaleTimeString()}
-                        </div>
-                      </td>
-                      <td className="px-6 py-4">
-                        {s.status === 'doing' ? (
-                          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-700">
-                            <Activity className="w-3.5 h-3.5" />
-                            ĐANG THI
-                          </span>
-                        ) : (
-                          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-700">
-                            <CheckCircle2 className="w-3.5 h-3.5" />
-                            ĐÃ NỘP BÀI
-                          </span>
-                        )}
-                      </td>
-                      <td className="px-6 py-4 font-bold text-lg text-slate-800">
-                        {s.score !== undefined ? (
-                          <span className={s.score >= 5 ? 'text-emerald-600' : 'text-rose-600'}>
-                            {s.score.toFixed(1)}
-                          </span>
-                        ) : '-'}
-                      </td>
-                      <td className="px-6 py-4 text-right">
-                        {s.status === 'finished' && (
-                          <button 
-                            onClick={() => setViewingSession(s)}
-                            className="inline-flex items-center gap-2 px-3 py-1.5 bg-white border border-slate-200 hover:border-primary-300 hover:text-primary-600 rounded-lg text-sm font-semibold transition-colors shadow-sm"
-                          >
-                            <Eye className="w-4 h-4" />
-                            Xem chi tiết
-                          </button>
-                        )}
-                      </td>
-                    </tr>
-                  ))}
-                  {sessions.length === 0 && (
-                    <tr>
-                      <td colSpan={5} className="px-6 py-20 text-center text-slate-500">
-                        Chưa có học sinh nào làm bài.
-                      </td>
-                    </tr>
-                  )}
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {viewingSession && (
-        <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-white w-full max-w-4xl rounded-2xl shadow-2xl flex flex-col max-h-[90vh]">
-            <div className="flex items-center justify-between p-6 border-b border-slate-100 bg-slate-50/50 rounded-t-2xl">
-              <div>
-                <h3 className="text-xl font-bold text-slate-800">Bài làm của {viewingSession.studentName}</h3>
-                <p className="text-sm text-slate-500 mt-1">{viewingSession.examTitle}</p>
-              </div>
-              <div className="flex items-center gap-6">
-                <div className="text-right">
-                  <div className="text-sm text-slate-500 font-medium uppercase tracking-wider mb-1">Điểm số</div>
-                  <div className="text-3xl font-black text-primary-600">{viewingSession.score?.toFixed(1)}</div>
-                </div>
-                <button onClick={() => setViewingSession(null)} className="p-2 hover:bg-slate-200 rounded-full text-slate-500 transition-colors">
-                  <X className="w-6 h-6" />
-                </button>
-              </div>
-            </div>
-            
-            <div className="p-6 overflow-y-auto flex-1 space-y-6">
-              {(() => {
-                const exam = exams.find(e => e.id === viewingSession.examId);
-                if (!exam) return <div>Không tìm thấy dữ liệu đề gốc.</div>;
-                
-                return exam.questions.map((q, idx) => {
-                  const studentAnswerId = viewingSession.answers?.[q.id];
-                  const isCorrect = studentAnswerId === q.correctOptionId;
-                  
-                  return (
-                    <div key={q.id} className={`p-5 rounded-xl border ${studentAnswerId ? (isCorrect ? 'border-emerald-200 bg-emerald-50/30' : 'border-rose-200 bg-rose-50/30') : 'border-slate-200 bg-slate-50/30'}`}>
-                      <h4 className="font-semibold text-slate-800 mb-4">
-                        Câu {idx + 1}: {q.content}
-                      </h4>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                        {q.options.map(opt => {
-                          const isStudentChoice = studentAnswerId === opt.id;
-                          const isActualCorrect = q.correctOptionId === opt.id;
-                          
-                          let className = "px-4 py-3 rounded-lg border text-sm font-medium flex justify-between items-center ";
-                          if (isActualCorrect) {
-                            className += "border-emerald-500 bg-emerald-100 text-emerald-800 ring-2 ring-emerald-500 ring-offset-1";
-                          } else if (isStudentChoice && !isActualCorrect) {
-                            className += "border-rose-500 bg-rose-100 text-rose-800";
-                          } else {
-                            className += "border-slate-200 bg-white text-slate-500 opacity-60";
-                          }
-
-                          return (
-                            <div key={opt.id} className={className}>
-                              <div className="flex gap-3">
-                                <span className="font-bold">{opt.id}.</span>
-                                {opt.content}
-                              </div>
-                              {isStudentChoice && (
-                                <span className="text-xs font-black uppercase tracking-wider">Học sinh chọn</span>
-                              )}
-                            </div>
-                          );
-                        })}
-                      </div>
-                      {!studentAnswerId && <p className="mt-3 text-sm text-rose-500 font-semibold italic">Học sinh bỏ trống câu này.</p>}
-                    </div>
-                  );
-                });
-              })()}
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
