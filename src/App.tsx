@@ -17,27 +17,29 @@ function ProtectedRoute({ children, allowedRole }: { children: React.ReactNode, 
 
 function App() {
   useEffect(() => {
-    // Tải dữ liệu ban đầu từ API local
-    fetch('/api/exams').then(r => r.json()).then(exams => {
-      useDataStore.setState({ exams });
+    const FIREBASE_URL = 'https://web-lich-su-8710d-default-rtdb.asia-southeast1.firebasedatabase.app';
+
+    // Tải dữ liệu ban đầu từ Firebase
+    fetch(`${FIREBASE_URL}/exams.json`).then(r => r.json()).then(exams => {
+      if (exams) useDataStore.setState({ exams });
     }).catch(console.error);
 
-    fetch('/api/sessions').then(r => r.json()).then(sessions => {
-      useActivityStore.setState({ sessions });
+    fetch(`${FIREBASE_URL}/sessions.json`).then(r => r.json()).then(sessions => {
+      if (sessions) useActivityStore.setState({ sessions });
     }).catch(console.error);
 
-    // Đồng bộ khi State thay đổi lên Server
+    // Đồng bộ khi State thay đổi lên Firebase (dùng PUT để ghi đè)
     useDataStore.subscribe((state) => {
-      fetch('/api/exams', {
-        method: 'POST',
+      fetch(`${FIREBASE_URL}/exams.json`, {
+        method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(state.exams)
       }).catch(console.error);
     });
 
     useActivityStore.subscribe((state) => {
-      fetch('/api/sessions', {
-        method: 'POST',
+      fetch(`${FIREBASE_URL}/sessions.json`, {
+        method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(state.sessions)
       }).catch(console.error);
@@ -46,8 +48,8 @@ function App() {
     // Polling cho Admin để xem realtime những ai đang thi
     const interval = setInterval(() => {
       if (useAuthStore.getState().role === 'admin') {
-        fetch('/api/sessions').then(r => r.json()).then(sessions => {
-          useActivityStore.setState({ sessions });
+        fetch(`${FIREBASE_URL}/sessions.json`).then(r => r.json()).then(sessions => {
+          if (sessions) useActivityStore.setState({ sessions });
         }).catch(console.error);
       }
     }, 3000);
