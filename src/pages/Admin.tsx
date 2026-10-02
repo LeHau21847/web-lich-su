@@ -84,27 +84,7 @@ export function Admin() {
       <header className="bg-slate-900 text-white sticky top-0 z-40 shadow-md">
         <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
           <div className="flex items-center gap-6">
-            <h1 className="font-bold text-lg hidden sm:block">Admin Panel</h1>
-            <div className="flex bg-slate-800 p-1 rounded-lg">
-              <button
-                onClick={() => setActiveTab('exams')}
-                className={`px-4 py-1.5 text-sm font-semibold rounded-md transition-colors ${activeTab === 'exams' ? 'bg-primary-600 text-white' : 'text-slate-300 hover:text-white hover:bg-slate-700'}`}
-              >
-                Quản lý Đề thi
-              </button>
-              <button
-                onClick={() => setActiveTab('activity')}
-                className={`px-4 py-1.5 text-sm font-semibold rounded-md transition-colors flex items-center gap-2 ${activeTab === 'activity' ? 'bg-primary-600 text-white' : 'text-slate-300 hover:text-white hover:bg-slate-700'}`}
-              >
-                Theo dõi Học sinh
-                {sessions.filter(s => s.status === 'doing').length > 0 && (
-                  <span className="flex h-2 w-2 relative">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-                  </span>
-                )}
-              </button>
-            </div>
+            <h1 className="font-bold text-lg hidden sm:block">Admin Panel - Quản lý Đề thi</h1>
           </div>
           <div className="flex items-center gap-6">
              <span className="text-sm font-medium text-slate-300 hidden md:block">Xin chào, {username}</span>
