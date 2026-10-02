@@ -119,6 +119,7 @@ export function Admin() {
         </div>
       </header>
 
+      {activeTab === 'exams' && (
       <div className="flex-1 max-w-7xl mx-auto w-full px-4 py-8 flex flex-col lg:flex-row gap-8">
         <div className="w-full lg:w-64 shrink-0">
           <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
