@@ -33,7 +33,7 @@ export function Login() {
 
   return (
     <div 
-      className="min-h-screen flex items-center justify-center bg-cover bg-center p-4 relative"
+      className="min-h-screen flex items-center justify-center bg-[length:100%_100%] bg-no-repeat bg-center p-4 relative"
       style={{ backgroundImage: `url(${bgLogin})` }}
     >
       <div className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm"></div>
