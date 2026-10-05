@@ -3,7 +3,8 @@ import { useDataStore } from '../store/dataStore';
 import { useExamStore } from '../store/examStore';
 import { useAuthStore } from '../store/authStore';
 import { useActivityStore } from '../store/activityStore';
-import { BookOpen, GraduationCap, ArrowRight, LogOut, User as UserIcon } from 'lucide-react';
+import { BookOpen, GraduationCap, ArrowRight, LogOut, User as UserIcon, History, RotateCcw, Eye, X } from 'lucide-react';
+import { useState } from 'react';
 import bgHome from '../assets/bg-home.png';
 
 export function Home() {
@@ -11,7 +12,10 @@ export function Home() {
   const { setCurrentExam } = useExamStore();
   const { exams } = useDataStore();
   const { logout, username } = useAuthStore();
-  const { startSession } = useActivityStore();
+  const { startSession, sessions } = useActivityStore();
+  
+  const myHistory = sessions.filter(s => s.studentName === username && s.status === 'finished');
+  const [viewingSession, setViewingSession] = useState<any>(null);
 
   const handleStartExam = (examId: string) => {
     const exam = exams.find(e => e.id === examId);
@@ -88,7 +92,125 @@ export function Home() {
             </div>
           ))}
         </div>
+
+        {/* Lịch sử làm bài */}
+        {myHistory.length > 0 && (
+          <div className="mt-16 bg-white/90 backdrop-blur-xl rounded-3xl p-8 shadow-2xl border border-white/40 max-w-4xl mx-auto">
+            <div className="flex items-center gap-3 mb-6 border-b border-slate-200 pb-4">
+              <History className="w-6 h-6 text-primary-600" />
+              <h2 className="text-2xl font-bold text-slate-800">Lịch sử làm bài của bạn</h2>
+            </div>
+            
+            <div className="space-y-4">
+              {myHistory.slice().reverse().map(session => (
+                <div key={session.id} className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-4 bg-white rounded-xl border border-slate-200 shadow-sm gap-4 hover:border-primary-300 transition-colors">
+                  <div>
+                    <h4 className="font-bold text-slate-800">{session.examTitle}</h4>
+                    <p className="text-sm text-slate-500 mt-1">
+                      Nộp bài: {new Date(session.endTime || session.startTime).toLocaleString()}
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-6 w-full sm:w-auto justify-between sm:justify-end">
+                    <div className="text-center">
+                      <div className="text-xs text-slate-500 font-medium uppercase tracking-wider mb-1">Điểm số</div>
+                      <div className={`text-xl font-black ${session.score && session.score >= 5 ? 'text-emerald-600' : 'text-rose-600'}`}>
+                        {session.score?.toFixed(1)}
+                      </div>
+                    </div>
+                    <div className="flex gap-2 shrink-0">
+                      <button
+                        onClick={() => setViewingSession(session)}
+                        className="p-2 text-slate-600 bg-slate-100 hover:bg-slate-200 hover:text-slate-900 rounded-lg transition-colors"
+                        title="Xem lại câu sai"
+                      >
+                        <Eye className="w-5 h-5" />
+                      </button>
+                      <button
+                        onClick={() => handleStartExam(session.examId)}
+                        className="p-2 text-primary-600 bg-primary-50 hover:bg-primary-100 hover:text-primary-700 rounded-lg transition-colors"
+                        title="Làm lại đề này"
+                      >
+                        <RotateCcw className="w-5 h-5" />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
+
+      {/* Modal Xem lại */}
+      {viewingSession && (
+        <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-white w-full max-w-4xl rounded-2xl shadow-2xl flex flex-col max-h-[90vh]">
+            <div className="flex items-center justify-between p-6 border-b border-slate-100 bg-slate-50/50 rounded-t-2xl">
+              <div>
+                <h3 className="text-xl font-bold text-slate-800">Chi tiết bài làm</h3>
+                <p className="text-sm text-slate-500 mt-1">{viewingSession.examTitle}</p>
+              </div>
+              <div className="flex items-center gap-6">
+                <div className="text-right">
+                  <div className="text-sm text-slate-500 font-medium uppercase tracking-wider mb-1">Điểm số</div>
+                  <div className="text-3xl font-black text-primary-600">{viewingSession.score?.toFixed(1)}</div>
+                </div>
+                <button onClick={() => setViewingSession(null)} className="p-2 hover:bg-slate-200 rounded-full text-slate-500 transition-colors">
+                  <X className="w-6 h-6" />
+                </button>
+              </div>
+            </div>
+            
+            <div className="p-6 overflow-y-auto flex-1 space-y-6">
+              {(() => {
+                const exam = exams.find(e => e.id === viewingSession.examId);
+                if (!exam) return <div>Không tìm thấy dữ liệu đề gốc.</div>;
+                
+                return exam.questions.map((q, idx) => {
+                  const studentAnswerId = viewingSession.answers?.[q.id];
+                  const isCorrect = studentAnswerId === q.correctOptionId;
+                  
+                  return (
+                    <div key={q.id} className={`p-5 rounded-xl border ${studentAnswerId ? (isCorrect ? 'border-emerald-200 bg-emerald-50/30' : 'border-rose-200 bg-rose-50/30') : 'border-slate-200 bg-slate-50/30'}`}>
+                      <h4 className="font-semibold text-slate-800 mb-4">
+                        Câu {idx + 1}: {q.content}
+                      </h4>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        {q.options.map(opt => {
+                          const isStudentChoice = studentAnswerId === opt.id;
+                          const isActualCorrect = q.correctOptionId === opt.id;
+                          
+                          let className = "px-4 py-3 rounded-lg border text-sm font-medium flex justify-between items-center ";
+                          if (isActualCorrect) {
+                            className += "border-emerald-500 bg-emerald-100 text-emerald-800 ring-2 ring-emerald-500 ring-offset-1";
+                          } else if (isStudentChoice && !isActualCorrect) {
+                            className += "border-rose-500 bg-rose-100 text-rose-800";
+                          } else {
+                            className += "border-slate-200 bg-white text-slate-500 opacity-60";
+                          }
+
+                          return (
+                            <div key={opt.id} className={className}>
+                              <div className="flex gap-3">
+                                <span className="font-bold">{opt.id}.</span>
+                                {opt.content}
+                              </div>
+                              {isStudentChoice && (
+                                <span className="text-xs font-black uppercase tracking-wider">Bạn chọn</span>
+                              )}
+                            </div>
+                          );
+                        })}
+                      </div>
+                      {!studentAnswerId && <p className="mt-3 text-sm text-rose-500 font-semibold italic">Bạn đã bỏ trống câu này.</p>}
+                    </div>
+                  );
+                });
+              })()}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
