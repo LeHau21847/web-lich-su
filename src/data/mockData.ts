@@ -1,4 +1,4 @@
-import { Exam } from '../types';
+import type { Exam } from '../types';
 
 export const mockData: Exam[] = [
   {

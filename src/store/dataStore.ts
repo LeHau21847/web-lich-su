@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import type { Exam, Question } from '../types';
-import { realMockExams } from '../data/mockData';
+import { mockData } from '../data/mockData';
 
 interface DataState {
   exams: Exam[];
@@ -17,7 +17,7 @@ interface DataState {
 export const useDataStore = create<DataState>()(
   persist(
     (set) => ({
-      exams: realMockExams,
+      exams: mockData,
       
       updateQuestion: (examId, questionId, newQuestion) => set((state) => ({
     exams: state.exams.map((exam) => {

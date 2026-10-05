@@ -30,11 +30,13 @@ function App() {
 
     // Đồng bộ khi State thay đổi lên Firebase (dùng PUT để ghi đè)
     useDataStore.subscribe((state) => {
-      fetch(`${FIREBASE_URL}/exams.json`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(state.exams)
-      }).catch(console.error);
+      if (useAuthStore.getState().role === 'admin') {
+        fetch(`${FIREBASE_URL}/exams.json`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(state.exams)
+        }).catch(console.error);
+      }
     });
 
     useActivityStore.subscribe((state) => {
