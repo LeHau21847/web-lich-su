@@ -1,6 +1,8 @@
-import { Exam } from '../types';
+const https = require('https');
 
-export const mockData: Exam[] = [
+const FIREBASE_URL = 'https://web-lich-su-8710d-default-rtdb.asia-southeast1.firebasedatabase.app';
+
+const examData = [
   {
     "id": "exam_1",
     "title": "Việt Nam trong năm đầu sau Cách mạng tháng Tám 1945",
@@ -340,3 +342,41 @@ export const mockData: Exam[] = [
     ]
   }
 ];
+
+function putData(path, data) {
+  return new Promise((resolve, reject) => {
+    const dataString = JSON.stringify(data);
+    const options = {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Content-Length': Buffer.byteLength(dataString)
+      }
+    };
+    
+    const req = https.request(FIREBASE_URL + path, options, (res) => {
+      let responseBody = '';
+      res.on('data', (chunk) => responseBody += chunk);
+      res.on('end', () => {
+        if (res.statusCode >= 200 && res.statusCode < 300) {
+          resolve(responseBody);
+        } else {
+          reject(new Error("HTTP " + res.statusCode + ": " + responseBody));
+        }
+      });
+    });
+    
+    req.on('error', (e) => reject(e));
+    req.write(dataString);
+    req.end();
+  });
+}
+
+async function run() {
+  console.log("Resetting database...");
+  await putData('/exams.json', examData);
+  await putData('/sessions.json', []);
+  console.log("Database reset complete.");
+}
+
+run();
