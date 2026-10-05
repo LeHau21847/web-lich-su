@@ -3,7 +3,7 @@ import { useDataStore } from '../store/dataStore';
 import { useExamStore } from '../store/examStore';
 import { useAuthStore } from '../store/authStore';
 import { useActivityStore } from '../store/activityStore';
-import { BookOpen, GraduationCap, ArrowRight, LogOut, User as UserIcon, History, RotateCcw, Eye, X } from 'lucide-react';
+import { BookOpen, GraduationCap, ArrowRight, LogOut, User as UserIcon, History, RotateCcw, Eye, X, Search, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useState } from 'react';
 import bgHome from '../assets/bg-home.png';
 
@@ -16,6 +16,14 @@ export function Home() {
   
   const myHistory = sessions.filter(s => s.studentName === username && s.status === 'finished');
   const [viewingSession, setViewingSession] = useState<any>(null);
+
+  const [searchTerm, setSearchTerm] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const examsPerPage = 4;
+
+  const filteredExams = exams.filter(exam => exam.title.toLowerCase().includes(searchTerm.toLowerCase()));
+  const totalPages = Math.ceil(filteredExams.length / examsPerPage);
+  const currentExams = filteredExams.slice((currentPage - 1) * examsPerPage, currentPage * examsPerPage);
 
   const handleStartExam = (examId: string) => {
     const exam = exams.find(e => e.id === examId);
@@ -57,13 +65,27 @@ export function Home() {
           <h1 className="text-5xl md:text-6xl font-black text-white mb-6 tracking-tight drop-shadow-md">
             Hệ thống Ôn thi <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-yellow-500">Lịch sử</span>
           </h1>
-          <p className="text-xl text-slate-200 max-w-2xl mx-auto font-medium">
+          <p className="text-xl text-slate-200 max-w-2xl mx-auto font-medium mb-8">
             Nền tảng kiểm tra kiến thức lịch sử chuẩn xác, giao diện hiện đại, giúp bạn tự tin bước vào kỳ thi.
           </p>
+
+          {/* Search bar */}
+          <div className="relative max-w-xl mx-auto">
+            <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+              <Search className="h-5 w-5 text-slate-400" />
+            </div>
+            <input
+              type="text"
+              placeholder="Tìm kiếm đề thi..."
+              value={searchTerm}
+              onChange={(e) => { setSearchTerm(e.target.value); setCurrentPage(1); }}
+              className="w-full pl-11 pr-4 py-3.5 bg-white/90 backdrop-blur-md border border-white/40 rounded-2xl text-slate-800 focus:outline-none focus:ring-4 focus:ring-primary-500/30 transition-all shadow-lg placeholder:text-slate-500 font-medium"
+            />
+          </div>
         </div>
 
         <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-          {exams.map((exam) => (
+          {currentExams.map((exam) => (
             <div 
               key={exam.id}
               className="bg-white/90 backdrop-blur-xl rounded-3xl p-8 shadow-2xl border border-white/40 hover:scale-[1.02] transition-transform duration-300 flex flex-col group"
@@ -91,7 +113,43 @@ export function Home() {
               </button>
             </div>
           ))}
+          {currentExams.length === 0 && (
+            <div className="col-span-2 text-center py-12 bg-white/10 backdrop-blur-md rounded-3xl border border-white/20">
+              <p className="text-white text-lg font-medium">Không tìm thấy đề thi nào phù hợp.</p>
+            </div>
+          )}
         </div>
+
+        {/* Phân trang */}
+        {totalPages > 1 && (
+          <div className="flex justify-center items-center gap-2 mt-8">
+            <button
+              onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+              disabled={currentPage === 1}
+              className="p-2 rounded-xl bg-white/20 backdrop-blur-md border border-white/30 text-white disabled:opacity-50 hover:bg-white/30 transition-colors"
+            >
+              <ChevronLeft className="w-5 h-5" />
+            </button>
+            <div className="flex gap-2">
+              {Array.from({ length: totalPages }, (_, i) => (
+                <button
+                  key={i + 1}
+                  onClick={() => setCurrentPage(i + 1)}
+                  className={`w-10 h-10 rounded-xl font-bold transition-all ${currentPage === i + 1 ? 'bg-primary-500 text-white shadow-lg shadow-primary-500/30' : 'bg-white/20 backdrop-blur-md border border-white/30 text-white hover:bg-white/30'}`}
+                >
+                  {i + 1}
+                </button>
+              ))}
+            </div>
+            <button
+              onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+              disabled={currentPage === totalPages}
+              className="p-2 rounded-xl bg-white/20 backdrop-blur-md border border-white/30 text-white disabled:opacity-50 hover:bg-white/30 transition-colors"
+            >
+              <ChevronRight className="w-5 h-5" />
+            </button>
+          </div>
+        )}
 
         {/* Lịch sử làm bài */}
         {myHistory.length > 0 && (

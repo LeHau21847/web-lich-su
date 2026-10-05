@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDataStore } from '../store/dataStore';
 import { useAuthStore } from '../store/authStore';
-import { Edit, Save, Trash2, LogOut, X, Plus, ToggleLeft, ToggleRight, CheckCircle2 } from 'lucide-react';
+import { Edit, Save, Trash2, LogOut, X, Plus, ToggleLeft, ToggleRight, CheckCircle2, Search, ChevronLeft, ChevronRight } from 'lucide-react';
 import type { Option } from '../types';
 
 export function Admin() {
@@ -26,6 +26,15 @@ export function Admin() {
   const [editQuestionContent, setEditQuestionContent] = useState('');
   const [editOptions, setEditOptions] = useState<Option[]>([]);
   const [editCorrectId, setEditCorrectId] = useState('');
+
+  // Search & Pagination for Admin
+  const [searchTerm, setSearchTerm] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const examsPerPage = 5;
+
+  const filteredExams = exams.filter(exam => exam.title.toLowerCase().includes(searchTerm.toLowerCase()));
+  const totalPages = Math.ceil(filteredExams.length / examsPerPage);
+  const currentExams = filteredExams.slice((currentPage - 1) * examsPerPage, currentPage * examsPerPage);
 
   const handleEditExamClick = () => {
     if (!selectedExam) return;
@@ -99,12 +108,26 @@ export function Admin() {
 
       <div className="flex-1 max-w-7xl mx-auto w-full px-4 py-8 flex flex-col lg:flex-row gap-8">
         <div className="w-full lg:w-64 shrink-0">
-          <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+          <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden flex flex-col">
             <div className="px-4 py-3 bg-slate-100 border-b border-slate-200 font-semibold text-slate-700">
               Danh sách đề thi
             </div>
-            <div className="divide-y divide-slate-100">
-              {exams.map(exam => (
+            <div className="p-2 border-b border-slate-100 bg-white">
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none">
+                  <Search className="h-4 w-4 text-slate-400" />
+                </div>
+                <input
+                  type="text"
+                  placeholder="Tìm kiếm..."
+                  value={searchTerm}
+                  onChange={(e) => { setSearchTerm(e.target.value); setCurrentPage(1); }}
+                  className="w-full pl-9 pr-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-primary-500/30 transition-all"
+                />
+              </div>
+            </div>
+            <div className="divide-y divide-slate-100 flex-1 overflow-y-auto">
+              {currentExams.map(exam => (
                 <button
                   key={exam.id}
                   onClick={() => { setSelectedExamId(exam.id); setIsEditingExam(false); setEditingQuestionId(null); }}
@@ -115,8 +138,32 @@ export function Admin() {
                   {exam.title}
                 </button>
               ))}
+              {currentExams.length === 0 && (
+                <div className="p-4 text-center text-sm text-slate-500">Không tìm thấy đề thi.</div>
+              )}
             </div>
-            <div className="p-3 border-t border-slate-100 bg-slate-50">
+            
+            {totalPages > 1 && (
+              <div className="p-2 flex items-center justify-between border-t border-slate-100 bg-slate-50 text-sm">
+                <button
+                  onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+                  disabled={currentPage === 1}
+                  className="p-1 rounded text-slate-500 disabled:opacity-30 hover:bg-slate-200"
+                >
+                  <ChevronLeft className="w-5 h-5" />
+                </button>
+                <span className="text-slate-500 font-medium">{currentPage} / {totalPages}</span>
+                <button
+                  onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+                  disabled={currentPage === totalPages}
+                  className="p-1 rounded text-slate-500 disabled:opacity-30 hover:bg-slate-200"
+                >
+                  <ChevronRight className="w-5 h-5" />
+                </button>
+              </div>
+            )}
+
+            <div className="p-3 border-t border-slate-200 bg-white">
               <button
                 onClick={() => {
                   addExam();
